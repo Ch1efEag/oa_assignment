@@ -1,0 +1,55 @@
+I have used recursion for solution and optimised using dynamic programming.
+Greedy wont work as skip and recharge sequence matters so we find thee best path here
+
+I used 0 based indexing in the code, and 1 based for explanation
+Assumptions in the problem:
+FOR K3,K7
+if we kill at k3 or k7 and we do not skip at k4,k8 then level[k4] = level[k4] + (level[k3]+1)/2;// for 5 -> 3 will be added to next index
+if we skip k3 or k4 everything works normally
+with recharge original power gets restored
+
+Test case1:
+
+12   ->power
+2    ->recharge
+2    ->skip
+3 4 5 10 2 3 5 10 2 5 3 ->levels
+
+in this case,
+3,4,5 will be defeated with initial power,
+skip index 4(power 10), as 10 + (5+1)/2 needs to be defeated at this index, so i skip it,as k3 can attack only k4 from behind
+Count skip=1,recharge=0 here
+i recharge before fighting index 5,
+i defeat k5,k6,k7 in one go,
+recharge=1,skip=1
+now i skip k8(as its power become 10+(5+1)/2, which can be defeated even after recharge)
+recharge=1,skip=2
+
+i recharge before fighting k9, and defeat k9,k10,k11 and come outside the chakravyuh
+recharge=2,skip=2
+This is the best scenario to escape in this test case
+
+
+Test case 2:
+
+12 ->power
+2  ->recharge
+1  ->skip
+3 4 10 1 2 3 5 1 8 1 1 ->levels
+
+in this case i defeat k1,k2
+skip =0,recharge=0
+then skip k3(will not attack from behind at k4 as its alive and will not regenerate)
+skip =1,recharge=0
+power 5 remaining here
+ k4,k5defeated
+ skip =1,recharge=0
+ recharge before k6,
+ defeat k6,k7,k8(k8+k7/2 )
+ skip =1,recharge=1
+ recharge last time 
+ ddefeat k9,k10,k11 and escape
+ skip =1,recharge=2,
+
+
+
